@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.min-w-min {
+    min-width: -moz-min-content !important;
+    min-width: min-content !important;
+}
+
+
+.p-focus input {
+    outline-offset: 0px;
+    outline: -webkit-focus-ring-color auto 1px;
+}
+.p-icon {
+    color: #374151;
+}
+
+.p-calendar {
+    padding: 0;
+    background-color: transparent;
+}
+
+*[dir=rtl] .right-none{
+    right: initial !important;
+} 
+.p-multiselect-items .p-checkbox-box,
+.p-multiselect-header .p-checkbox-box{
+    border: 1px solid #ccc;
+   
+}
+.p-multiselect-header .p-checkbox-box .p-icon,
+.p-multiselect-items .p-checkbox-box .p-icon{
+    color: white;
+}
+
+@layer base {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body{
+        background-color: #161729;
+    }
+}
+textarea:focus-visible, input:focus-visible{
+    outline: none;
+}
