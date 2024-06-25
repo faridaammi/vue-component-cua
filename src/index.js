@@ -59,6 +59,8 @@ import SearchInput from './components/Input/SearchInput.vue'
 import SuffixInput from './components/Input/SuffixInput.vue'
 import TextArea from './components/Input/TextArea.vue'
 import TextInput from './components/Input/TextInput.vue'
+//Banner
+import Banner from './components/Banner/Banner.vue'
 
 //primvue
 import Calendar from 'primevue/calendar';
@@ -117,4 +119,4 @@ export {
     Text ,
     Title ,
     ListGroupItem ,
-    Link,GroupButton }
+    Link,GroupButton,Banner }
