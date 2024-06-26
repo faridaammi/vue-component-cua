@@ -11,8 +11,14 @@
     </div>
     <div >
         <input v-bind="$attrs" v-model="model"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary focus:ring-1 block w-full p-2.5  dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"  
-        :class="{ 'ps-10': startIcon,'pe-10': endIcon }" />
+        class="bg-white border border-gray-300 text-gray-900 text-sm shadow-sm rounded-lg focus:ring-primary focus:border-primary focus:ring-1 block w-full p-2.5  dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"  
+        :class="{ 'ps-10': startIcon,'ps-14': prefix,'pe-14': prefix,'pe-10': endIcon }" />
+    </div>
+    <div v-if="$props.suffix" class="absolute inset-y-0 end-0 flex items-center pe-4 pointer-events-none text-gray-500">
+          {{ $props.suffix }}
+    </div>
+    <div v-if="$props.prefix" class="absolute inset-y-0 start-4 flex items-center pe-4 pointer-events-none text-gray-500">
+          {{ $props.prefix }}
     </div>
 </div>
 </template>
@@ -26,6 +32,6 @@ defineOptions({
 })
 const emit = defineEmits(['update:modelValue'])
 defineProps(
-  ['startIcon','endIcon']
+  ['startIcon','endIcon','prefix','suffix']
 );
 </script>

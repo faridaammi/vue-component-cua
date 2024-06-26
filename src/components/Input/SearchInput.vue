@@ -18,7 +18,7 @@ defineOptions({
 </script>
 
 <template>
-        <form class="flex items-center "  v-bind="$attrs" @submit.prevent="submitForm">   
+        <form class="flex items-center"  v-bind="$attrs" @submit.prevent="submitForm">   
 
             <div class="relative w-full">
                 <InputText v-model="model" v-bind="$attrs" type='text'></InputText>

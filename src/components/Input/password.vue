@@ -6,7 +6,7 @@
              <div >
                  <input v-bind="$attrs" :type="showPassword ? 'text' : 'password'" 
                  v-model="pass" 
-                 class="bg-gray-50 ps-10 hide-datapicker border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:ring-1 focus:border-primary block w-full p-2.5  dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"  />
+                 class="bg-white ps-10 hide-datapicker shadow-sm border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:ring-1 focus:border-primary block w-full p-2.5  dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"  />
              </div>
              <div class="absolute inset-y-0 end-0 flex items-center pe-4 ">
                  <button class="button" @click="toggleShow">
@@ -17,9 +17,9 @@
          </div>
          <div class="flex" v-if="isValide">
             <div :class="'flex h-2 w-full mx-1 rounded-full '+colors[successCount-1]" v-for="item in (0, successCount)" :key="item"  ></div>
-            <div class="flex h-2 w-full mx-1 rounded-full bg-gray-50 border border-gray-300 dark:border-gray-600 dark:bg-slate-800" v-for="item in (0, count)" :key="item"  ></div>
+            <div class="flex h-2 w-full mx-1 rounded-full bg-white border border-gray-300 dark:border-gray-600 dark:bg-slate-800" v-for="item in (0, count)" :key="item"  ></div>
         </div>
-         <div v-show="suggetion" class="bg-gray-50 border border-gray-300 dark:bg-gray-800 dark:border-gray-600 dark:text-white p-4 rounded-lg mt-4"  :class="{'hidden' : !showSuggetion}" >
+         <div v-show="suggetion" class="bg-white border shadow-sm border-gray-300 dark:bg-gray-800 dark:border-gray-600 dark:text-white p-4 rounded-lg mt-4"  :class="{'hidden' : !showSuggetion}" >
                 <h3 class="text-xl font-semibold dark:text-white" >Suggetion</h3>
                 <div v-for="error in passwordValidation.errors" :key="error">
                     <ul class="list-disc ml-4 text-dark dark:text-white"  >

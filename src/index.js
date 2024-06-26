@@ -56,7 +56,6 @@ import password from './components/Input/password.vue'
 import PasswordInput from './components/Input/PasswordInput.vue'
 import RadioButton from './components/Input/RadioButton.vue'
 import SearchInput from './components/Input/SearchInput.vue'
-import SuffixInput from './components/Input/SuffixInput.vue'
 import TextArea from './components/Input/TextArea.vue'
 import TextInput from './components/Input/TextInput.vue'
 //Banner
@@ -74,10 +73,11 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import ColumnGroup from 'primevue/columngroup';
 import Row from 'primevue/row';
+import Dialog from 'primevue/dialog';
 
 
 export {
-    Calendar, Dropdown, InputOtp, Password, DataTable, Column, ColumnGroup, Row, MultiSelect, Editor, 
+    Calendar, Dropdown, InputOtp, Password, DataTable, Column, ColumnGroup, Row, MultiSelect, Editor,Dialog,
     PasswordInput, 
     Button, 
     LightButton, 
@@ -94,7 +94,6 @@ export {
     password ,
     RadioButton ,
     SearchInput ,
-    SuffixInput ,
     TextArea ,
     TextInput ,
     Alert ,
