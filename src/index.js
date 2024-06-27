@@ -68,6 +68,8 @@ import Editor from 'primevue/editor';
 import InputOtp from "primevue/inputotp";
 import MultiSelect from 'primevue/multiselect';
 import Password from 'primevue/password';
+import Checkbox from 'primevue/checkbox';
+
 // import message from "@/presets/lara/message";
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
@@ -77,7 +79,7 @@ import Dialog from 'primevue/dialog';
 
 
 export {
-    Calendar, Dropdown, InputOtp, Password, DataTable, Column, ColumnGroup, Row, MultiSelect, Editor,Dialog,
+    Calendar, Dropdown, InputOtp, Password, DataTable, Column, ColumnGroup, Row, MultiSelect, Editor,Dialog, Checkbox,
     PasswordInput, 
     Button, 
     LightButton, 

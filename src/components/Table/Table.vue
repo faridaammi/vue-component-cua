@@ -136,7 +136,7 @@ const changeCount = (value)=>{emit('onChangeCount',value)}
                         aria-labelledby='dropdownCheckboxButton'>
                         <li  v-for="(header, i) in headers" :key="i">
                             <div v-if="header.toggle == true" class='flex items-center' >
-                                <CheckBox  :id="['checkbox-item-', i]" v-model="header.display" name="sexe"
+                                <CheckBox  :binary="true"   :id="['checkbox-item-', i]" v-model="header.display" name="sexe"
                                     @change="toggleColumn(i)" />
                                 <Label :for="['checkbox-item-', i]" class="mx-2">
                                     {{ header.title }}
@@ -169,7 +169,7 @@ const changeCount = (value)=>{emit('onChangeCount',value)}
                             <th :align="header.align" :width=" header.title == 'checked' ? '40px' : 'initial'"  v-for="(header, i) in headers" :key="`${header}${i}`"
                                 :class="{'px-3  py-3' : header.title == 'checked' , 'px-4 py-3': !hiddenColumns.includes(i) && header.title != 'checked' , 'hidden': hiddenColumns.includes(i) ||  (header.title == 'checked' && checkable == false) }" >
                                 <span v-if="header.title == 'checked' && checkable == true">
-                                    <CheckBox id="item-all" v-model='checkedAll' @change="checkAll"/>
+                                    <CheckBox :binary="true"   id="item-all" v-model='checkedAll' @change="checkAll"/>
                                 </span>
                                 <span v-else-if="!hiddenColumns.includes(i) "> {{ header.title }}</span>
                             </th>
@@ -184,7 +184,7 @@ const changeCount = (value)=>{emit('onChangeCount',value)}
                                     <slot :name="`column${colIndex}`" :entity="entity"></slot>
                                 </td>
                                 <td v-if="!hiddenColumns.includes(colIndex) && header.title == 'checked' && checkable == true" class="px-3 py-4 ">
-                                    <CheckBox :id="`item-line-`+rowIndex" v-model="entity.checked" name="lines"
+                                    <CheckBox  :binary="true"   :id="`item-line-`+rowIndex" v-model="entity.checked" name="lines"
                                         @change="checkedData" />
                                 </td>
                             </template>
