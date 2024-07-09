@@ -13,11 +13,11 @@
             token:{class:'dark:bg-gray-400'},
             header:{class:'p-3 order-bb dark:bg-gray-800'},
          }">
-             <template #option="slotProps">
+             <!-- <template #option="slotProps">
                  <div class="flex align-items-center ">
                      <div>{{ slotProps.option.name }}</div>
                  </div>
-             </template> 
+             </template>  -->
              
              <template #footer>
                  <div class=" p-3 px-3 border-t">

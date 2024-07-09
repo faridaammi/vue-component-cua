@@ -4,12 +4,11 @@
          <i class="pi pi-lock h-4 w-4 text-gray-700" />
        </div>
              <div >
-                 <input v-bind="$attrs" :type="showPassword ? 'text' : 'password'" 
-                 v-model="pass" 
+                 <input v-bind="$attrs" :type="showPassword ? 'text' : 'password'" v-model="model" 
                  class="bg-white ps-10 hide-datapicker shadow-sm border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:ring-1 focus:border-primary block w-full p-2.5  dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"  />
              </div>
              <div class="absolute inset-y-0 end-0 flex items-center pe-4 ">
-                 <button class="button" @click="toggleShow">
+                 <button class="button" @click="toggleShow" type="button">
                          <i v-if="showPassword" class="pi pi-eye-slash h-5 w-5 text-gray-500" />                    
                          <i v-else class="pi pi-eye h-5 w-5 text-gray-500" />                    
                  </button>
@@ -31,6 +30,7 @@
    </template>
    <script setup>
    import { computed, ref } from "vue";   
+const props = defineProps(['isValide','suggetion'])
    
    const value = ref(null);
    const rules =ref([
@@ -49,7 +49,6 @@
 
    var count = ref(0)
    var successCount = ref(0)
-   const pass = ref('')
    const password = ref(false)
    const showPassword = ref(null)
    const showSuggetion = ref(true)
@@ -60,7 +59,7 @@
     let errors = []
     let success = []
 			for (let condition of rules.value) {
-				if (!condition.regex.test(pass.value)) {
+				if (!condition.regex.test(model.value)) {
                    
 					errors.push(condition.message)
                     showSuggetion.value = true
@@ -79,18 +78,14 @@
             }
 			return {valid:errors.length === 0, errors, showSuggetion}
    })
-const isRuleValid = (rule) => {
-  return rule.regex.test(pass.value);
-}
-   const toggleShow = () => {
-         showPassword.value = !showPassword.value;
-       };
-   const model = defineModel()
-//    const isValide = ref()
-   defineProps(['isValide','suggetion'])
-     defineOptions({
-         inheritAttrs:false
-     })
+
+const toggleShow = () => {
+    showPassword.value = !showPassword.value;
+};
+const model = defineModel()
+defineOptions({
+    inheritAttrs:false
+})
    
-     </script>
+</script>
      

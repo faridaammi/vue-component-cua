@@ -58,6 +58,8 @@ import RadioButton from './components/Input/RadioButton.vue'
 import SearchInput from './components/Input/SearchInput.vue'
 import TextArea from './components/Input/TextArea.vue'
 import TextInput from './components/Input/TextInput.vue'
+import InputColor from './components/Input/InputColor.vue'
+
 //Banner
 import Banner from './components/Banner/Banner.vue'
 
@@ -76,10 +78,11 @@ import Column from 'primevue/column';
 import ColumnGroup from 'primevue/columngroup';
 import Row from 'primevue/row';
 import Dialog from 'primevue/dialog';
+import ColorPicker from 'primevue/colorpicker';
 
 
 export {
-    Calendar, Dropdown, InputOtp, Password, DataTable, Column, ColumnGroup, Row, MultiSelect, Editor,Dialog, Checkbox,
+    Calendar, Dropdown, InputOtp, Password, DataTable, Column, ColumnGroup, Row, MultiSelect, Editor,Dialog, Checkbox,ColorPicker,
     PasswordInput, 
     Button, 
     LightButton, 
@@ -120,4 +123,4 @@ export {
     Text ,
     Title ,
     ListGroupItem ,
-    Link,GroupButton,Banner }
+    Link,GroupButton,Banner,InputColor }

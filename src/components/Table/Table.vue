@@ -118,7 +118,8 @@ const changeCount = (value)=>{emit('onChangeCount',value)}
 <template>
     <div>
         <div class="clear-both block space-y-2">
-            <DropDown class="float-end ml-2 xl:flex hidden"
+            <!-- count rows -->
+            <DropDown class="float-end mb-2 ml-2 xl:flex hidden"
             :placeholder='selectedCount' 
             :modelValue="selectedCount"
             :options='numberRow'
@@ -126,8 +127,9 @@ const changeCount = (value)=>{emit('onChangeCount',value)}
             optionValue="code"
             @change="changeCount"
             />
+            <!-- header settings -->
             <div>
-                <DropDownButton class="float-end" v-model="model" v-if="allTogglesFalse">
+                <DropDownButton class="float-end mb-2" v-model="model" v-if="allTogglesFalse">
                 <template v-slot:drop>
                     <LightButtonIcon icon='pi-objects-column' size="md" color='light' />
                 </template>
@@ -145,25 +147,26 @@ const changeCount = (value)=>{emit('onChangeCount',value)}
                         </li>
                     </ul>
                 </template>
-            </DropDownButton>
+                </DropDownButton>
             </div>
             <slot/>
-            <div class="w-full  lg:w-min">
-                <InputSearch placeholder='search ...' class="w-full lg:mb-0 md:w-min mb-1 float-start"  @formSubmit='onSearch'>
-                <LightButton type="submit" color="dark" startIcon="pi-search" class="flex ml-2 mb-1 lg:mb-0 md:mr-1 ">Search</LightButton>
+            <!-- search -->
+            <div class="w-full mb-4 lg:w-min">
+                <InputSearch placeholder='search ...' class="w-full lg:mb-2 md:w-min mb-1 float-start"  @formSubmit='onSearch'>
+                <LightButton type="submit" color="dark" startIcon="pi-search" class="flex ml-2 mb-1 lg:mb-2 md:mr-1 ">Search</LightButton>
             </InputSearch>
             </div>
            
-            <div class="flex items-center ">
+            <div class="items-center">
                 <slot name="actions" />
             </div>
         </div>
 
         <!-- table -->
         <div>
-            <div class="relative overflow-x-auto sm:rounded-lg block clear-both border shadow-sm dark:border-gray-600">
+            <div class="relative mt-2 overflow-x-auto sm:rounded-lg block clear-both border shadow-sm dark:border-gray-600">
                 <table v-bind="$attrs"
-                    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
+                    class="w-full table-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th :align="header.align" :width=" header.title == 'checked' ? '40px' : 'initial'"  v-for="(header, i) in headers" :key="`${header}${i}`"
@@ -203,3 +206,8 @@ const changeCount = (value)=>{emit('onChangeCount',value)}
     outline: -webkit-focus-ring-color auto 1px;
 }
 </style>
+
+
+
+
+
