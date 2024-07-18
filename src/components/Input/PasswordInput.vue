@@ -6,7 +6,7 @@
     </div>
 
         <Password v-model="value" toggleMask v-bind="$attrs"
-        inputClass="bg-gray-50 ps-10 shadow-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:ring-1focus:border-primary block w-full p-2.5  dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+        inputClass="bg-gray-50 ps-10 shadow-none border border-gray-300 !h-10 text-gray-900 text-sm rounded-lg focus:ring-primary focus:ring-1focus:border-primary block w-full p-2.5  dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
         :pt="{
              input : {class : 'min-w-min w-10rem bg-error'},
             meterLabel : {class: 'text-error'},

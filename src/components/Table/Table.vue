@@ -21,6 +21,17 @@ import Label from '../Input/Label.vue';
 import DropDown from '../Drop/DropDown.vue';
 
 const props = defineProps({
+    // added
+    tableId : String,
+    searchPlaceholder : {
+        type: String,
+        default: "Search here"
+    },
+    searchTextButton : {
+        type: String,
+        default: "Search"
+    },
+    //
     headers: Array,
     data: Array,
     name: String,
@@ -28,8 +39,8 @@ const props = defineProps({
     checkable: Boolean,
     actions: Boolean,
     selectedCount: {
-        type : Number,
-        default : 10
+        type: Number,
+        default: 10
     }
 });
 const hiddenColumns = ref([]);
@@ -45,73 +56,95 @@ const selectCount = ref(100)
 
 
 const toggleColumn = (index) => {
-    // Toggle the visibility of the column by adding/removing its index from hiddenColumns array
-    if (hiddenColumns.value.includes(index) ) {
+    if (hiddenColumns.value.includes(index)) {
         hiddenColumns.value = hiddenColumns.value.filter((colIndex) => colIndex !== index);
     } else {
         hiddenColumns.value.push(index);
     }
+    storageHeader()
+
 };
 
 const initColumn = () => {
-    // console.log(props.headers);
     props.headers.map((column, i) => {
         if (!column.display)
             hiddenColumns.value.push(i)
-       
-    }); 
+    });
 
-}; 
+};
 
-const checkedDefault = ()=> {
+const checkedDefault = () => {
     props.data.forEach(dt => {
-       if(dt.checked === undefined && props.checkable) 
-       {
+        if (dt.checked === undefined && props.checkable) {
             dt.checked = false;
-       }
+        }
     })
 }
+
 onMounted(() => {
+    checkStorage();
     checkedDefault();
     initColumn();
     checkAll();
     allTogglesFalse
 
+
 });
+const checkStorage = () => {
+    if (localStorage.getItem("TabelHeaders_"+props.tableId)) {
+        props.headers.splice(0);
+        const storageHeaderList = JSON.parse(localStorage.getItem("TabelHeaders_"+props.tableId));
+        storageHeaderList.map((item) => {
+            props.headers.push(item);
+        })
+
+    }
+}
 const searchQuery = ref()
 
 
 const checkedList = ref([]);
 const checkedAll = ref(false)
 
-const emit = defineEmits(['onSelect','onChangeCount']);
+const emit = defineEmits(['onSelect', 'onChangeCount']);
 
 const checkLine = (index) => {
     // Toggle the visibility of the column by adding/removing its index from hiddenColumns array
 };
 const checkAll = () => {
-    if(checkedAll.value == true)
-    {
-        for(let i =0 ; i < props.data.length; i++ ){
+    if (checkedAll.value == true) {
+        for (let i = 0; i < props.data.length; i++) {
             props.data[i].checked = true;
         }
     }
-    else {props.data.forEach((item) => item.checked = false)}
+    else { props.data.forEach((item) => item.checked = false) }
     checkedData()
-    emit("onSelect",checkedList.value);
+    emit("onSelect", checkedList.value);
 
 }
 const allTogglesFalse = computed(() => {
-      return props.headers.some(header => header.toggle === true);
-    });
-const onSearch = (value) =>  emit("onSearch",value);   
-const checkedData = () => {   
+    return props.headers.some(header => header.toggle === true);
+});
+const onSearch = (value) => emit("onSearch", value);
+const checkedData = () => {
     checkedList.value = props.data.filter(row => row.checked);
-    // console.log(checkedList.value)
-    emit("onSelect",checkedList.value);
+    emit("onSelect", checkedList.value);
 };
 
-const changeCount = (value)=>{emit('onChangeCount',value)}
+const changeCount = (value) => { emit('onChangeCount', value) }
+
+const newHeaders = ref([])
+
+const storageHeader = () => {
+    hiddenColumns.value.map((item) => {
+        props.headers.forEach((header,key) => {
+            if(item == key){
+                props.headers[key].display = false;
+            }
+        })
+    })
+    localStorage.setItem("TabelHeaders_"+props.tableId,JSON.stringify(props.headers));
+}
 
 </script>
 
@@ -119,44 +152,42 @@ const changeCount = (value)=>{emit('onChangeCount',value)}
     <div>
         <div class="clear-both block space-y-2">
             <!-- count rows -->
-            <DropDown class="float-end mb-2 ml-2 xl:flex hidden"
-            :placeholder='selectedCount' 
-            :modelValue="selectedCount"
-            :options='numberRow'
-            optionLabel='name'
-            optionValue="code"
-            @change="changeCount"
-            />
+            <DropDown class="float-end mb-2 ml-2 xl:flex hidden" :placeholder='selectedCount'
+                :modelValue="selectedCount" :options='numberRow' optionLabel='name' optionValue="code"
+                @change="changeCount" />
             <!-- header settings -->
             <div>
                 <DropDownButton class="float-end mb-2" v-model="model" v-if="allTogglesFalse">
-                <template v-slot:drop>
-                    <LightButtonIcon icon='pi-objects-column' size="md" color='light' />
-                </template>
-                <template v-slot:panel >
-                    <ul  class='p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200 dark:bg-gray-800'
-                        aria-labelledby='dropdownCheckboxButton'>
-                        <li  v-for="(header, i) in headers" :key="i">
-                            <div v-if="header.toggle == true" class='flex items-center' >
-                                <CheckBox  :binary="true"   :id="['checkbox-item-', i]" v-model="header.display" name="sexe"
-                                    @change="toggleColumn(i)" />
-                                <Label :for="['checkbox-item-', i]" class="mx-2">
-                                    {{ header.title }}
-                                </Label>
-                            </div>
-                        </li>
-                    </ul>
-                </template>
+                    <template v-slot:drop>
+                        <LightButtonIcon icon='pi-objects-column' size="md" color='light' />
+                    </template>
+                    <template v-slot:panel>
+                        <ul class='p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200 dark:bg-gray-800'
+                            aria-labelledby='dropdownCheckboxButton'>
+                            <li v-for="(header, i) in headers" :key="i">
+                                <div v-if="header.toggle == true" class='flex items-center'>
+                                    <CheckBox :binary="true" :inputId="['checkbox-item-', i]" v-model="header.display"
+                                        name="sexe" @change="toggleColumn(i)" />
+                                    <Label :for="['checkbox-item-', i]" class="mx-2">
+                                        {{ header.title }}
+                                    </Label>
+                                </div>
+                            </li>
+                        </ul>
+                    </template>
                 </DropDownButton>
             </div>
-            <slot/>
+            <slot />
             <!-- search -->
             <div class="w-full mb-4 lg:w-min">
-                <InputSearch placeholder='search ...' class="w-full lg:mb-2 md:w-min mb-1 float-start"  @formSubmit='onSearch'>
-                <LightButton type="submit" color="dark" startIcon="pi-search" class="flex ml-2 mb-1 lg:mb-2 md:mr-1 ">Search</LightButton>
-            </InputSearch>
+                <InputSearch :placeholder='searchPlaceholder' class="w-full lg:mb-2 md:w-min mb-1 float-start"
+                    @formSubmit='onSearch'>
+                    <LightButton type="submit" color="dark" startIcon="pi-search"
+                        class="flex ml-2 mb-1 lg:mb-2 md:mr-1 ">{{searchTextButton}}
+                    </LightButton>
+                </InputSearch>
             </div>
-           
+
             <div class="items-center">
                 <slot name="actions" />
             </div>
@@ -164,17 +195,20 @@ const changeCount = (value)=>{emit('onChangeCount',value)}
 
         <!-- table -->
         <div>
-            <div class="relative mt-2 overflow-x-auto sm:rounded-lg block clear-both border shadow-sm dark:border-gray-600">
+            <div
+                class="relative mt-2 overflow-x-auto sm:rounded-lg block clear-both border shadow-sm dark:border-gray-600">
+
                 <table v-bind="$attrs"
                     class="w-full table-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th :align="header.align" :width=" header.title == 'checked' ? '40px' : 'initial'"  v-for="(header, i) in headers" :key="`${header}${i}`"
-                                :class="{'px-3  py-3' : header.title == 'checked' , 'px-4 py-3': !hiddenColumns.includes(i) && header.title != 'checked' , 'hidden': hiddenColumns.includes(i) ||  (header.title == 'checked' && checkable == false) }" >
+                            <th :align="header.align" :width="header.title == 'checked' ? '40px' : 'initial'"
+                                v-for="(header, i) in headers" :key="`${header}${i}`"
+                                :class="{ 'px-3  py-3': header.title == 'checked', 'px-4 py-3': !hiddenColumns.includes(i) && header.title != 'checked', 'hidden': hiddenColumns.includes(i) || (header.title == 'checked' && checkable == false) }">
                                 <span v-if="header.title == 'checked' && checkable == true">
-                                    <CheckBox :binary="true"   id="item-all" v-model='checkedAll' @change="checkAll"/>
+                                    <CheckBox :binary="true" id="item-all" v-model='checkedAll' @change="checkAll" />
                                 </span>
-                                <span v-else-if="!hiddenColumns.includes(i) "> {{ header.title }}</span>
+                                <span v-else-if="!hiddenColumns.includes(i)"> {{ header.title }}</span>
                             </th>
                         </tr>
                     </thead>
@@ -182,13 +216,15 @@ const changeCount = (value)=>{emit('onChangeCount',value)}
                         <tr v-for="(entity, rowIndex) in data" :key="rowIndex"
                             class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                             <template v-for="(header, colIndex) in headers" :key="colIndex">
-                                <td :align="header.align" v-if="!hiddenColumns.includes(colIndex)  && header.title != 'checked'"
+                                <td :align="header.align"
+                                    v-if="!hiddenColumns.includes(colIndex) && header.title != 'checked'"
                                     :class="{ 'px-4 py-4': !hiddenColumns.includes(colIndex), 'hidden': hiddenColumns.includes(colIndex) }">
                                     <slot :name="`column${colIndex}`" :entity="entity"></slot>
                                 </td>
-                                <td v-if="!hiddenColumns.includes(colIndex) && header.title == 'checked' && checkable == true" class="px-3 py-4 ">
-                                    <CheckBox  :binary="true"   :id="`item-line-`+rowIndex" v-model="entity.checked" name="lines"
-                                        @change="checkedData" />
+                                <td v-if="!hiddenColumns.includes(colIndex) && header.title == 'checked' && checkable == true"
+                                    class="px-3 py-4 ">
+                                    <CheckBox :binary="true" :id="`item-line-` + rowIndex" v-model="entity.checked"
+                                        name="lines" @change="checkedData" />
                                 </td>
                             </template>
                         </tr>
@@ -206,8 +242,3 @@ const changeCount = (value)=>{emit('onChangeCount',value)}
     outline: -webkit-focus-ring-color auto 1px;
 }
 </style>
-
-
-
-
-

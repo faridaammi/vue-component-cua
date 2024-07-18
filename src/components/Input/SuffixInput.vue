@@ -12,7 +12,7 @@
         </div>
         <div >
             <input v-bind="$attrs" v-model="model"
-            class="bg-white shadow-sm border border-gray-300 dark:text-light text-sm rounded-lg focus:ring-primary focus:border-primary focus:ring-1 block w-full p-2.5  dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-primary dark:focus:border-primary"  
+            class="bg-white shadow-sm border border-gray-300 dark:text-light !h-10 text-sm rounded-lg focus:ring-primary focus:border-primary focus:ring-1 block w-full p-2.5  dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-primary dark:focus:border-primary"  
             :class="{ 'ps-10': icon,'pe-10': endIcon }" />
         </div>
     </div>

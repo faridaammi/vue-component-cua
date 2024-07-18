@@ -1,5 +1,5 @@
 <template>
-   <button type="button" :class="[getColor(color), getSize(size)]" :disabled="isLoading">
+   <button type="button" :class="[getColor(color), getSize(size)]" :disabled="isLoading" v-bind="$attrs">
         <i v-show="isLoading" v-if="!endIcon"  :class="['pi pi-spin pi-spinner me-2',getSizeIcon(size)]" ></i>
         <component v-if="!isLoading" :is="startIcon" :class="[getSizeIcon(size),'me-2 pi ', startIcon ]"/>
 

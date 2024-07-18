@@ -59,6 +59,7 @@ import SearchInput from './components/Input/SearchInput.vue'
 import TextArea from './components/Input/TextArea.vue'
 import TextInput from './components/Input/TextInput.vue'
 import InputColor from './components/Input/InputColor.vue'
+import FileInput from './components/Input/FileInput.vue'
 
 //Banner
 import Banner from './components/Banner/Banner.vue'
@@ -71,6 +72,7 @@ import InputOtp from "primevue/inputotp";
 import MultiSelect from 'primevue/multiselect';
 import Password from 'primevue/password';
 import Checkbox from 'primevue/checkbox';
+import radio from 'primevue/radiobutton';
 
 // import message from "@/presets/lara/message";
 import DataTable from 'primevue/datatable';
@@ -82,7 +84,7 @@ import ColorPicker from 'primevue/colorpicker';
 
 
 export {
-    Calendar, Dropdown, InputOtp, Password, DataTable, Column, ColumnGroup, Row, MultiSelect, Editor,Dialog, Checkbox,ColorPicker,
+    Calendar, Dropdown, InputOtp, Password, DataTable, Column, ColumnGroup, Row, MultiSelect, Editor,Dialog, Checkbox,ColorPicker,radio,
     PasswordInput, 
     Button, 
     LightButton, 
@@ -123,4 +125,4 @@ export {
     Text ,
     Title ,
     ListGroupItem ,
-    Link,GroupButton,Banner,InputColor }
+    Link,GroupButton,Banner,InputColor,FileInput }
