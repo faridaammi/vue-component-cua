@@ -19,9 +19,14 @@ import LightButtonIcon from '../Button/LightButtonIcon.vue';
 import CheckBox from '../Input/CheckBox.vue';
 import Label from '../Input/Label.vue';
 import DropDown from '../Drop/DropDown.vue';
+import { BoltSlashIcon } from '@heroicons/vue/24/solid';
 
 const props = defineProps({
     // added
+    isSorted: {
+        type : Boolean,
+        default: false
+    },
     tableId : String,
     searchPlaceholder : {
         type: String,
@@ -106,7 +111,7 @@ const searchQuery = ref()
 const checkedList = ref([]);
 const checkedAll = ref(false)
 
-const emit = defineEmits(['onSelect', 'onChangeCount']);
+const emit = defineEmits(['onSelect', 'onChangeCount','onSorted']);
 
 const checkLine = (index) => {
     // Toggle the visibility of the column by adding/removing its index from hiddenColumns array
@@ -145,6 +150,51 @@ const storageHeader = () => {
     })
     localStorage.setItem("TabelHeaders_"+props.tableId,JSON.stringify(props.headers));
 }
+
+// Sorting state
+const sortState = ref({
+  index: -1,
+  order: 'default', // 'default', 'asc', 'desc'
+});
+
+// Sorting icons
+const sortIcons = {
+  default: 'pi-sort-alt',
+  asc: 'pi-sort-alpha-down',
+  desc: 'pi-sort-alpha-up',
+};
+
+// Function to get the current sort icon for a column
+const getSortIcon = (index) => {
+  if (sortState.value.index === index) {
+    return sortIcons[sortState.value.order];
+  }
+  return sortIcons.default;
+};
+
+// Function to toggle sorting order
+const sendSort = (order, fieldOrder) => { emit('onSorted', order, fieldOrder) }
+
+const toggleSort = (index,title) => {
+  if (sortState.value.index === index) {
+    if (sortState.value.order === 'default') {
+      sortState.value.order = 'asc';
+    } else if (sortState.value.order === 'asc') {
+      sortState.value.order = 'desc';
+    } else {
+      sortState.value.order = 'default';
+      sortState.value.index = -1;
+    }
+    sendSort(sortState.value.order,title);
+  } 
+  else {
+    sortState.value.index = index;
+    sortState.value.order = 'asc';
+    sendSort(sortState.value.order,title);
+
+  }
+};
+
 
 </script>
 
@@ -203,12 +253,14 @@ const storageHeader = () => {
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th :align="header.align" :width="header.title == 'checked' ? '40px' : 'initial'"
-                                v-for="(header, i) in headers" :key="`${header}${i}`"
+                                v-for="(header, i) in headers" :key="`${header}${i}`" 
                                 :class="{ 'px-3  py-3': header.title == 'checked', 'px-4 py-3': !hiddenColumns.includes(i) && header.title != 'checked', 'hidden': hiddenColumns.includes(i) || (header.title == 'checked' && checkable == false) }">
                                 <span v-if="header.title == 'checked' && checkable == true">
                                     <CheckBox :binary="true" id="item-all" v-model='checkedAll' @change="checkAll" />
                                 </span>
-                                <span v-else-if="!hiddenColumns.includes(i)"> {{ header.title }}</span>
+                                
+                               
+                                 <span v-else-if="!hiddenColumns.includes(i)" class="cursor-pointer" @click="toggleSort(i,header.title)"> {{ header.title}} <i v-if="header.sorted === true && $props.isSorted === true" :class="['pi float-end text-xs cursor-pointer',getSortIcon(i)]"></i> </span>
                             </th>
                         </tr>
                     </thead>
