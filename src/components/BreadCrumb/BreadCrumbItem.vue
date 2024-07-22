@@ -27,7 +27,7 @@ defineProps(
 
         <!-- hover:font-semibold hover:md:font-medium  -->
     
-        <a :href="href"  v-bind="$attrs" class="flex  font-medium  justify-center items-center text-sm  text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+        <a :href="href"  v-bind="$attrs" class="flex  font-medium  justify-center items-center text-sm  text-gray-700 hover:text-primary dark:text-gray-400 dark:hover:text-white">
             <component v-if="icon"  :is="icon" :class="['me-2 pi ', icon ]"/>
                 {{title}}
         </a>

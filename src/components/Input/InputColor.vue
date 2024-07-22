@@ -7,23 +7,29 @@
             input:{class:'rounded-md'}
         }"/>
         </div>
-        <input v-model="model"
+        <input v-model="model" 
         class="bg-white border ps-5 border-gray-300 !h-10 pe-10 text-gray-900 text-sm shadow-sm rounded-lg focus:ring-primary focus:border-primary focus:ring-1 block w-full p-2.5  dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"  
         />
-        <span class="absolute inset-y-0 start-0 flex items-center ps-2">#</span>
     </div>
 </template>
 <script setup>
 import ColorPicker from 'primevue/colorpicker';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 // defineOptions({
-//     inheritAttrs:false
+//     inheritAttrs:false 
 // })
-
-const model = defineModel()
-
+const model = ref('#0d4aa1');
 const emit = defineEmits(['update:modelValue'])
+// const handleInput = () => {
+//     emit('update:modelValue', model.value);
+//     console.log(model.value);
+// };
+watch(model, (newVal) => {
+    if (!newVal.startsWith('#')) {
+        model.value = '#' + newVal;
+    }
+});
 </script>
 
 

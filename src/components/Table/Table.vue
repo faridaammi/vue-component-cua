@@ -270,11 +270,11 @@ const toggleSort = (index,title) => {
                             <template v-for="(header, colIndex) in headers" :key="colIndex">
                                 <td :align="header.align"
                                     v-if="!hiddenColumns.includes(colIndex) && header.title != 'checked'"
-                                    :class="{ 'px-4 py-4': !hiddenColumns.includes(colIndex), 'hidden': hiddenColumns.includes(colIndex) }">
+                                    :class="{ 'px-4 py-2': !hiddenColumns.includes(colIndex), 'hidden': hiddenColumns.includes(colIndex) }">
                                     <slot :name="`column${colIndex}`" :entity="entity"></slot>
                                 </td>
                                 <td v-if="!hiddenColumns.includes(colIndex) && header.title == 'checked' && checkable == true"
-                                    class="px-3 py-4 ">
+                                    class="px-3 py-2 ">
                                     <CheckBox :binary="true" :id="`item-line-` + rowIndex" v-model="entity.checked"
                                         name="lines" @change="checkedData" />
                                 </td>

@@ -5,12 +5,15 @@
        </div>
              <div >
                  <input v-bind="$attrs" :type="showPassword ? 'text' : 'password'" v-model="model" 
-                 class="bg-white ps-10 hide-datapicker shadow-sm border !h-10 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:ring-1 focus:border-primary block w-full p-2.5  dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"  />
+                 class="bg-white ps-10 hide-datapicker pe-20 shadow-sm border !h-10 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:ring-1 focus:border-primary block w-full p-2.5  dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"  />
              </div>
-             <div class="absolute inset-y-0 end-0 flex items-center pe-4 ">
+             <div class="absolute inset-y-0 end-0 flex items-center pe-4 space-x-3">
                  <button class="button" @click="toggleShow" type="button">
-                         <i v-if="showPassword" class="pi pi-eye-slash h-5 w-5 text-gray-500" />                    
-                         <i v-else class="pi pi-eye h-5 w-5 text-gray-500" />                    
+                         <i v-if="showPassword" class="pi pi-eye-slash text-md text-gray-500" />                    
+                         <i v-else class="pi pi-eye text-md text-gray-500" />                    
+                 </button>
+                 <button  v-if="isGenerate" class="button" @click="generatePassword" type="button">
+                         <i class="pi pi-sync text-sm text-gray-500" />                    
                  </button>
              </div> 
          </div>
@@ -30,7 +33,7 @@
    </template>
    <script setup>
    import { computed, ref } from "vue";   
-const props = defineProps(['isValide','suggetion'])
+const props = defineProps(['isValide','suggetion','isGenerate'])
    
    const value = ref(null);
    const rules =ref([
@@ -86,6 +89,36 @@ const model = defineModel()
 defineOptions({
     inheritAttrs:false
 })
+
+const generatePassword = () => {
+          const length = 12;
+          const lowercase = 'abcdefghijklmnopqrstuvwxyz';
+          const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+          const numbers = '0123456789';
+          const symbols = '!@#$%^&*()_+~`|}{[]:;?><,./-=';
+
+          const allChars = lowercase + uppercase + numbers + symbols;
+          
+          const getRandomChar = (chars) => chars[Math.floor(Math.random() * chars.length)];
+
+          let newPassword = '';
+
+          // Ensure the password meets the criteria
+          newPassword += getRandomChar(lowercase);
+          newPassword += getRandomChar(uppercase);
+          newPassword += getRandomChar(numbers + symbols);
+
+          // Fill the rest of the password length with random characters from all character sets
+          for (let i = newPassword.length; i < length; i++) {
+            newPassword += getRandomChar(allChars);
+          }
+
+          // Shuffle the password to ensure the criteria characters are not in the first positions
+          newPassword = newPassword.split('').sort(() => 0.5 - Math.random()).join('');
+        
+          showPassword.value  = true;
+          model.value = newPassword;
+        };
    
 </script>
      
