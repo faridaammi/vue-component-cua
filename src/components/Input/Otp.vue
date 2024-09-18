@@ -10,8 +10,13 @@
 
 <script setup>
 import InputOtp from "primevue/inputotp";
-import { ref } from "vue";
+import { ref, computed } from "vue";
+const props = defineProps(['defaultValue'])
 
-const value = ref(null);
+const value = ref(props.defaultValue);
+
+const otpValue = computed(() => {
+      return value.value + ' - dynamic part';
+    });
 </script>
 

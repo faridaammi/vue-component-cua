@@ -8,19 +8,14 @@
         :pt="{
             panel:{class:'border border-gray dark:bg-gray-800 dark:text-light'},
             item:{class:'rounded-none dark:text-light dark:hover:text-gray-800'},
-            root:{class:'bg-white border shadow-sm border-gray-300 text-gray-900 text-sm rounded-lg focus:border-primary  w-full p-0.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary'},
-            filterInput:{class:'bg-white  p-focus shadow-none  border-2 focus:border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary'},
+            root:{class: getSize(size)},
+            filterInput:{class:'bg-white  p-focus shadow-none !h-10 border-2 focus:border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary'},
             token:{class:'dark:bg-gray-400'},
             header:{class:'p-3 order-bb dark:bg-gray-800'},
          }">
-             <!-- <template #option="slotProps">
-                 <div class="flex align-items-center ">
-                     <div>{{ slotProps.option.name }}</div>
-                 </div>
-             </template>  -->
              
              <template #footer>
-                 <div class=" p-3 px-3 border-t">
+                 <div v-if="$props.Items != null && $props.selectItem != null " class=" p-3 px-3 border-t">
                      {{ selectItem ? selectItem.length : 0 }} / {{ Items.length }}
                  </div>
              </template>
@@ -38,8 +33,30 @@
      inheritAttrs:false
  })
  defineProps(
-   ['selectItem','Items']
+   {
+     selectItem : {
+         type: Array,
+         default: null
+     } ,
+     Items:{
+         type: Array,
+         default: null
+     } ,
+     size : {
+         type: String,
+     } ,
+ }
  );
+ const sizes = ref({
+     xs : "text-xs !h-6 flex items-center bg-white border shadow-sm border-gray-300 text-gray-900 rounded-lg focus:border-primary  w-full p-0.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary",
+     sm : "text-sm !h-8 flex items-center bg-white border shadow-sm border-gray-300 text-gray-900 rounded-lg focus:border-primary  w-full p-0.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary",
+     md : "text-md !h-10 flex items-center bg-white border shadow-sm border-gray-300 text-gray-900 rounded-lg focus:border-primary  w-full p-0.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary",
+     lg : "text-lg !h-12 flex items-center bg-white border shadow-sm border-gray-300 text-gray-900 rounded-lg focus:border-primary  w-full p-0.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary",
+     xl : "text-xl !h-14 flex items-center bg-white border shadow-sm border-gray-300 text-gray-900 rounded-lg focus:border-primary  w-full p-0.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary",
+ })
+ const getSize = (size) => {
+   return sizes.value[size] || sizes.value.md;
+ }
  </script>
  
  <style scoped>

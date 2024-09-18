@@ -2,34 +2,43 @@
 
 <template>
   <span v-click-away="onClickAway" v-bind="$attrs" class="relative">
-      <span @click="toggle">
+      <span  @click="togglePanel">
         <slot name="drop"></slot>
       </span>
-      <div id="dropdownHelper" class="z-10 end-0 border border-gray bg-white divide-y divide-gray-100 rounded-lg shadow w-60 dark:border-gray-600 dark:bg-gray-800 dark:divide-gray-600 absolute "  :class="{ hidden: !state }">
+      <div v-if="modelValue" id="dropdownHelper" class="z-10 flex items-center end-0 border mt-1 border-gray bg-white divide-y divide-gray-100 rounded-lg shadow  dark:border-gray-600 dark:bg-gray-800 dark:divide-gray-600 absolute " >
         <slot name="panel"/>
       </div>
   </span>
 </template>
 
 <script setup>
-import { ref } from 'vue';
 
-const positions = ref({
-  start:"",
-  end:'end-0'
-})
-const state = ref(false);
-const toggle = ()=>{
-  state.value = !state.value;
+import { defineProps, defineEmits } from 'vue';
+  
+  // Props and emits setup
+  const props = defineProps({
+    modelValue: {
+      type: Boolean,
+      required: true
+    },
+      isClickAway:{
+    type:Boolean,
+    default: true
+ },
+  });
+   const onClickAway = (event)=>{
+      if(props.isClickAway === true)
+        emit('update:modelValue', false);
+
+  // console.log("away");
  }
- const onClickAway = (event)=>{
-  state.value = false;
-  console.log("away");
- }
- const getPosition = (position) => {
-  return positions.value[position] || positions.value.start;
-}
- defineProps(['start','end'])
+  const emit = defineEmits(['update:modelValue']);
+  
+  // Function to toggle panel visibility
+  const togglePanel = () => {
+    emit('update:modelValue', !props.modelValue);
+  };
+
 </script>
 
 

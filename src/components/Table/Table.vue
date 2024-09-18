@@ -50,7 +50,8 @@ const props = defineProps({
     selectedCount: {
         type: Number,
         default: 10
-    }
+    },
+    searchValue:String
 });
 const hiddenColumns = ref([]);
 const numberRow = ref([
@@ -62,6 +63,11 @@ const numberRow = ref([
 const model = defineModel()
 const selectCount = ref(100)
 
+const valueSearch = ref(props.searchValue);
+    
+    const searchValue = computed(() => {
+      return valueSearch.value ;
+    });
 
 
 const toggleColumn = (index) => {
@@ -198,7 +204,8 @@ onMounted(() => {
         sortedField.value = props.defaultSort.replace("-", "");
         sortedOrder.value = props.defaultSort.indexOf("-") == -1 ? "asc" : "desc";
     }
-
+    
+    console.log(props.valueDefault);
 });
 
 </script>
@@ -212,12 +219,12 @@ onMounted(() => {
                 @change="changeCount" />
             <!-- header settings -->
             <div>
-                <DropDownButton class="float-end mb-2" v-model="model" v-if="allTogglesFalse">
+                <DropDownButton class="float-end mb-2" v-model="model" v-if="allTogglesFalse" :isClickAway="true">
                     <template v-slot:drop>
                         <LightButtonIcon icon='pi-objects-column' size="md" color='light' />
                     </template>
                     <template v-slot:panel>
-                        <ul class='p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200 dark:bg-gray-800'
+                        <ul class='p-3 w-max min-w-52 space-y-3 text-sm text-gray-700 dark:text-gray-200 dark:bg-gray-800'
                             aria-labelledby='dropdownCheckboxButton'>
                             <li v-for="(header, i) in headers" :key="i">
                                 <div v-if="header.toggle == true" class='flex items-center'>
@@ -235,7 +242,7 @@ onMounted(() => {
             <slot />
             <!-- search -->
             <div class="w-full mb-4 lg:w-min">
-                <InputSearch :placeholder='searchPlaceholder' class="w-full lg:mb-2 md:w-min mb-1 float-start"
+                <InputSearch :placeholder='searchPlaceholder' v-model="valueSearch" class="w-full lg:mb-2 md:w-min mb-1 float-start"
                     @formSubmit='onSearch'>
                     <LightButton type="submit" color="dark" startIcon="pi-search"
                         class="flex ml-2 mb-1 lg:mb-2 md:mr-1 ">

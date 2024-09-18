@@ -5,15 +5,15 @@
        </div>
              <div >
                  <input v-bind="$attrs" :type="showPassword ? 'text' : 'password'" v-model="model" 
-                 class="bg-white ps-10 hide-datapicker pe-20 shadow-sm border !h-10 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:ring-1 focus:border-primary block w-full p-2.5  dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"  />
+                 :class="['bg-white ps-10 hide-datapicker pe-20 shadow-sm border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:ring-1 focus:border-primary block w-full p-2.5  dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary',getSize(size)]"  />
              </div>
              <div class="absolute inset-y-0 end-0 flex items-center pe-4 space-x-3">
                  <button class="button" @click="toggleShow" type="button">
-                         <i v-if="showPassword" class="pi pi-eye-slash text-md text-gray-500" />                    
-                         <i v-else class="pi pi-eye text-md text-gray-500" />                    
+                         <i v-if="showPassword" :class="['pi pi-eye-slash text-gray-500',getSizeIcon(size)]" />                    
+                         <i v-else :class="['pi pi-eye text-md text-gray-500',getSizeIcon(size)]" />                    
                  </button>
                  <button  v-if="isGenerate" class="button" @click="generatePassword" type="button">
-                         <i class="pi pi-sync text-sm text-gray-500" />                    
+                         <i :class="['pi pi-sync text-sm text-gray-500',getSizeIcon(size)]" />                    
                  </button>
              </div> 
          </div>
@@ -33,7 +33,7 @@
    </template>
    <script setup>
    import { computed, ref } from "vue";   
-const props = defineProps(['isValide','suggetion','isGenerate'])
+const props = defineProps(['isValide','suggetion','isGenerate','size'])
    
    const value = ref(null);
    const rules =ref([
@@ -119,6 +119,27 @@ const generatePassword = () => {
           showPassword.value  = true;
           model.value = newPassword;
         };
-   
+
+const sizes = ref({
+    xs : "!h-6",
+    sm : "!h-8",
+    md : "!h-10",
+    lg : "!h-12",
+    xl : "!h-14",
+})
+const sizesIcons = ref({
+    xs : " text-xs",
+    sm : "text-sm",
+    md : " text-md",
+    lg : " text-lg",
+    xl : " text-xl",
+})
+const getSize = (size) => {
+  return sizes.value[size] || sizes.value.md;
+}
+const getSizeIcon = (size) => {
+  return sizesIcons.value[size] || sizesIcons.value.md;
+}
+
 </script>
      
