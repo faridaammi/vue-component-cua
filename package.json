@@ -1,7 +1,7 @@
 {
   "name": "vue-component-cua",
   "private": false,
-  "version": "0.3.1",
+  "version": "0.3.6",
   "type": "module",
   "homepage": "https://ui.e-agadir.ma/",
   "repository": {
@@ -9,7 +9,15 @@
     "url": "https://github.com/faridaammi/vue-component-cua"
   },
   "author": "Farid AAMMI",
-  "keywords": ["vue component cua","ui framework","component framework","ui library","component library","material components","vue framework"],
+  "keywords": [
+    "vue component cua",
+    "ui framework",
+    "component framework",
+    "ui library",
+    "component library",
+    "material components",
+    "vue framework"
+  ],
   "files": [
     "dist"
   ],
@@ -30,7 +38,7 @@
   },
   "dependencies": {
     "primeicons": "^7.0.0",
-    "primevue": "^3.52.0",
+    "primevue": "^3.53.0",
     "quill": "^2.0.2",
     "vue": "^3.4.21"
   },

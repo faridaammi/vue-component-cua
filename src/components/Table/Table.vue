@@ -19,7 +19,6 @@ import LightButtonIcon from '../Button/LightButtonIcon.vue';
 import CheckBox from '../Input/CheckBox.vue';
 import Label from '../Input/Label.vue';
 import DropDown from '../Drop/DropDown.vue';
-import { BoltSlashIcon } from '@heroicons/vue/24/solid';
 
 const props = defineProps({
     // added

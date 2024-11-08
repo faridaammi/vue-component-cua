@@ -60,6 +60,7 @@ import TextArea from './components/Input/TextArea.vue'
 import TextInput from './components/Input/TextInput.vue'
 import InputColor from './components/Input/InputColor.vue'
 import FileInput from './components/Input/FileInput.vue'
+import TagsInput from './components/Input/TagsInput.vue';
 
 //Banner
 import Banner from './components/Banner/Banner.vue'
@@ -81,6 +82,7 @@ import ColumnGroup from 'primevue/columngroup';
 import Row from 'primevue/row';
 import Dialog from 'primevue/dialog';
 import ColorPicker from 'primevue/colorpicker';
+import Chips from 'primevue/chips';
 
 
 export {
@@ -125,4 +127,4 @@ export {
     Text ,
     Title ,
     ListGroupItem ,
-    Link,GroupButton,Banner,InputColor,FileInput }
+    Link,GroupButton,Banner,InputColor,FileInput,TagsInput }
