@@ -7,7 +7,7 @@
                  <input v-bind="$attrs" :type="showPassword ? 'text' : 'password'" v-model="model" 
                  :class="['bg-white ps-10 hide-datapicker pe-20 shadow-sm border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:ring-1 focus:border-primary block w-full p-2.5  dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary',getSize(size)]"  />
              </div>
-             <div class="absolute inset-y-0 end-0 flex items-center pe-4 space-x-3">
+             <div class="absolute inset-y-0 end-0 flex items-center pe-4 space-x-3 rtl:flex-row-reverse">
                  <button class="button" @click="toggleShow" type="button">
                          <i v-if="showPassword" :class="['pi pi-eye-slash text-gray-500',getSizeIcon(size)]" />                    
                          <i v-else :class="['pi pi-eye text-md text-gray-500',getSizeIcon(size)]" />                    

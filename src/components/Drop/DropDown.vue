@@ -5,10 +5,11 @@
 <template>
     <Dropdown v-model="model" v-bind="$attrs" 
     :pt="{
-        panel:{class:'border border-gray !mt-1 dark:border-gray-600 dark:bg-gray-800 dark:text-white'},
+        panel:{class:'border border-gray !mt-1  dark:border-gray-600 dark:bg-gray-800 dark:text-white'},
         item:{class:'rounded-none dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white'},
         root:{class:getSize(size)},
-        filterInput:{class:'bg-gray-50 !h-10 shadow-none flex mb-2 border focus:ring-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary p-2.5  dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary'},
+        filterIcon: {class:'absolute end-4 rtl:right-auto '},
+        filterInput:{class:'relative bg-gray-50 !h-10 shadow-none flex mb-2 border focus:ring-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary p-2.5  dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary'},
         header:{class:'dark:bg-gray-800 dark:text-white'},
         emptyMessage: {class:'dark:text-gray-400'},
         input: {class: getSizeText(size)},
