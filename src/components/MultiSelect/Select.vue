@@ -7,11 +7,15 @@
         <MultiSelect v-model="model"  v-bind="$attrs"
         :pt="{
             panel:{class:'border border-gray dark:bg-gray-800 dark:text-light'},
-            item:{class:'rounded-none dark:text-light dark:hover:text-gray-800'},
+            item:{class:'rounded-none dark:text-light dark:hover:text-gray-800 '},
             root:{class: getSize(size)},
-            filterInput:{class:'bg-white  p-focus shadow-none !h-10 border-2 focus:border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary'},
-            token:{class:'dark:bg-gray-400'},
+            filterIcon:{class:'dark:bg-gray-400 absolute end-4 rtl:right-auto'},
+            filterInput:{class:'bg-white  shadow-none !h-10 border-2 focus:border-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary'},
+            token:{class:'dark:bg-gray-400 '},
+            removeTokenIcon	:{class:'dark:bg-gray-400 rtl:mx-1'},
             header:{class:'p-3 order-bb dark:bg-gray-800'},
+            option:{class:'ms-2'},
+            header :{class:'dark:bg-gray-800 rtl:space-x-2 rtl:space-x-reverse'}
          }">
              
              <template #footer>
